@@ -20,11 +20,11 @@ int main(){
     do{
       p=0;
       do{
-      r=n%10;
-      n=(n-r)/10;
-      p=p+pow(static_cast<double>(r),2);
+        r=n%10;
+        n=(n-r)/10;
+        p=p+pow(static_cast<double>(r),2);
       }while(n!=0);
-    n=p;
+      n=p;
     }while(p>9);
     if(p==1) cout << "Feliz";
     else cout << "Triste";
