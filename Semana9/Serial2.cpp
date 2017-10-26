@@ -11,6 +11,8 @@ void setup() {
 void loop() {
 // read the analog input on pin 0:
   if (Serial.available() > 0) {
+      // read the incoming byte:
+    incomingByte = Serial.read();
     incomingByte-=48;
     Serial.println(incomingByte);
     if(incomingByte%2){
