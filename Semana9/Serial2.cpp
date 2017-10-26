@@ -1,4 +1,3 @@
-
 int incomingByte = 0;    // variable to hold the analog value
 int ledPin = 13; 
 
@@ -16,11 +15,14 @@ void loop() {
     incomingByte-=48;
     Serial.println(incomingByte);
     if(incomingByte%2){
+      Serial.print("Impar\n");
       digitalWrite(ledPin, HIGH);  // Enciende el LED 
       delay(1000);      // Pause de 1 segundo 
       digitalWrite(ledPin, LOW);  // Apaga el LED 
       delay(1000);
     }
+    else
+      Serial.print("Par\n");
   }
   // delay 10 milliseconds before the next reading:
   delay(10);
