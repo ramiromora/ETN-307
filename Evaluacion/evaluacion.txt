@@ -1,0 +1,14 @@
+/*
+************************************
+La evaluación se efectuará el día jueves 7 de diciembre
+donde los cursantes deberán presentar:
+- Diez (10) ejercicios resueltos (impresos y en formato digital) 
+  del portal http://www.titancod.net
+- Un (1) proyecto (impreso y en placa de desarrollo funcional) 
+  donde se emplee un circuito electrónico en base a Arduino
+
+De los 10 ejercicios resueltos, se elegirá un al azar y se validará 
+contra el juez virtual. A continuación, se realizará una exposición, 
+por parte del cursante, acerca del proyecto electrónico desarrollado.
+************************************
+*/
