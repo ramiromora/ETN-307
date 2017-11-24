@@ -1,38 +1,38 @@
-#include <fstream.h>
-#include <stdlib.h>
+#include <iostream>
+#include <fstream>
+#include <cstring>
 
-int main()
-{
-    ifstream origen("Pruebas.txt");
-    char linea[128];
+using namespace std;
+ 
+struct tipoRegistro {
+   char nombre[32];
+   int edad;
+   float altura;
+};
 
-    if(origen.fail())
-    cerr << "Error al abrir el archivo Pruebas.txt" << endl;
-    else
-    {
-        ofstream destino("Copia.txt", ios::noreplace);
-        if(destino.fail())
-        cerr << "Error al crear el archivo: Copia.txt" << endl;
-        else
-        {
-            while(!origen.eof())
-            {
-                origen.getline(linea, sizeof(linea));
-                if(origen.good()) // si lectura ok y
-                if(origen.eof())  // si eof, -> termina
-                exit(1);          // el programa
-                else
-                destino << linea << endl;
-                if(destino.fail())
-                {
-                    cerr << "Fallo de escritura en archivo" << endl;
-                    exit(1);
-                }
-            }
-        }
-        destino.close();
-    }
-    origen.close();
+int main() {
+   tipoRegistro pepe;
+   tipoRegistro pepe2;
+   ofstream fsalida("prueba.dat", 
+      ios::out | ios::binary);
+   
+   strcpy(pepe.nombre, "Jose Luis");
+   pepe.edad = 32;
+   pepe.altura = 1.78;
+   
+   fsalida.write(reinterpret_cast<char *>(&pepe), 
+      sizeof(tipoRegistro));
+   fsalida.close();
 
-    return 0;
-} 
+   ifstream fentrada("prueba.dat", 
+      ios::in | ios::binary);
+   
+   fentrada.read(reinterpret_cast<char *>(&pepe2), 
+      sizeof(tipoRegistro));
+   cout << pepe2.nombre << endl;
+   cout << pepe2.edad << endl;
+   cout << pepe2.altura << endl;
+   fentrada.close();
+
+   return 0;
+}
