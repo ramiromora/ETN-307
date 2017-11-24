@@ -1,42 +1,34 @@
-#include <fstream.h>
-#include <stdlib.h>
+#include <iostream>
+#include <fstream>
 
-int main()
-{
-    ifstream origen("Archiv04.exe", ios::binary);
-    char linea[1];
+using namespace std;
 
-    if(origen.fail())
-    cerr << "Error al abrir el archivo: Archiv04.exe" << endl;
-    else
-    {
-        ofstream destino("Copia.exe", ios::binary);
-        if(destino.fail())
-        cerr << "Error al crear el archivo: Copia.exe" << endl;
+int main () {
+
+    fstream ficheroMp3;
+    char marca[3];
+
+    ficheroMp3.open ("ejemplo.mp3", ios::in | ios::binary);
+    // Compruebo si he podido abrir
+
+    if (ficheroMp3.is_open()) {
+        // Me coloco donde empieza el ID3 TAG
+        ficheroMp3.seekg(-128, ios::end);
+        // Leo 3 bytes
+
+        ficheroMp3.read(marca, 3);
+        // Digo si day datos o no
+        if ((marca[0] != 'T') || (marca[1] != 'A') || (marca[2] != 'G'))
+
+            cout << "Sin datos de artista" << endl;
         else
-        {
-            while(!origen.eof()&&!origen.fail())
-            {
-                origen.read(linea, sizeof(linea));
-                if(origen.good())
-                {
-                    destino.write(linea, sizeof(linea));
-                    if(destino.fail())
-                    {
-                        cerr << "Error en el archivo: Copia.exe" << endl;
-                        exit(1);
-                    }
-                }
-                else if(!origen.eof())
-                {
-                    cerr << "Error en el archivo: Archiv04.exe" << endl;
-                    exit(1);
-                }
-            }
-        }
-        destino.close();
-    }
-    origen.close();
+            cout << "Parece un MP3 con ID3 TAG" << endl;
+        // Finalmente, cierro
 
+        ficheroMp3.close();
+    }
+    // Si no he podido abrir, aviso
+    else cout << "Fichero inexistente" << endl;
     return 0;
-} 
+
+}
